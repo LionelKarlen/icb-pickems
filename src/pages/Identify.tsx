@@ -4,6 +4,8 @@ import { groups } from "../lib/store/group";
 import { stack } from "@style/patterns";
 import { Inputfield } from "../lib/components/Inputfield";
 import { Btn } from "../lib/components/Btn";
+import { setIdentity } from "../lib/store/identity";
+import { useNavigate } from "@solidjs/router";
 
 export const Identify: Component = () => {
 
@@ -12,11 +14,19 @@ export const Identify: Component = () => {
 
   const valid = createMemo(() => userName() != "" && userGroup() != "");
 
+  const navigate = useNavigate();
+
   function handleSubmit() {
     if (!valid()) return
 
+    setIdentity({
+      group: userGroup(),
+      name: userName(),
+      empty: false
+    })
 
 
+    navigate("/pick");
   }
 
   return (

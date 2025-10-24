@@ -3,12 +3,13 @@ import { render } from 'solid-js/web';
 import 'solid-devtools';
 import "./index.css";
 
-import { Route, Router } from '@solidjs/router';
+import { Route, Router, useNavigate } from '@solidjs/router';
 import { Identify } from './pages/Identify';
 import { Thankyou } from './pages/Thankyou';
 import { Pick } from './pages/Pick';
-import { ParentComponent } from 'solid-js';
+import { createEffect, ParentComponent } from 'solid-js';
 import { center } from '@style/patterns';
+import { identity } from './lib/store/identity';
 
 const root = document.getElementById('root');
 
@@ -26,8 +27,26 @@ const Root: ParentComponent = (props) => {
   );
 }
 
+const GuardUnidentified: ParentComponent = (props) => {
+  const navigate = useNavigate();
+
+  createEffect(() => {
+    if (identity.empty) {
+      navigate("/");
+    }
+  });
+
+  return (
+    <>
+      {props.children}
+    </>
+  );
+}
+
 render(() => <Router root={Root}>
   <Route path="/" component={Identify} />
-  <Route path="/thankyou" component={Thankyou} />
-  <Route path="/pick" component={Pick} />
-</Router>, root!);
+  <Route component={GuardUnidentified}>
+    <Route path="/thankyou" component={Thankyou} />
+    <Route path="/pick" component={Pick} />
+  </Route>
+</Router >, root!);

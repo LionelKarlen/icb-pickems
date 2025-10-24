@@ -13,6 +13,8 @@
   "license": "MIT",
   "devDependencies": {
     "@pandacss/dev": "^1.4.3",
+    "@pandacss/preset-base": "^1.4.3",
+    "@park-ui/panda-preset": "^0.43.1",
     "solid-devtools": "^0.34.3",
     "typescript": "^5.7.2",
     "vite": "^7.1.4",
@@ -21,6 +23,7 @@
   "dependencies": {
     "@ark-ui/solid": "^5.26.2",
     "@solidjs/router": "^0.15.3",
+    "solid-icons": "^1.1.0",
     "solid-js": "^1.9.5"
   }
 }

@@ -8,6 +8,7 @@ type props = {
   helper?: string,
   onChange: (value: string) => void,
   value: string,
+  invalid?: boolean
 }
 
 export const Inputfield: Component<props> = (props) => {

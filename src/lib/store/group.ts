@@ -14,4 +14,5 @@ export const group_b: string[] = [
 
 
 export const groups: string[] = group_a.concat(group_b);
+export const blanked_groups: string[] = group_a.concat(["fake_spacer"], group_b);
 

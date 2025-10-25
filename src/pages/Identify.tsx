@@ -4,14 +4,14 @@ import { groups } from "../lib/store/group";
 import { stack } from "@style/patterns";
 import { Inputfield } from "../lib/components/Inputfield";
 import { Btn } from "../lib/components/Btn";
-import { setIdentity } from "../lib/store/identity";
+import { identity, setIdentity } from "../lib/store/identity";
 import { A, useNavigate } from "@solidjs/router";
 import { css } from "@style/css";
 
 export const Identify: Component = () => {
 
-  const [userGroup, setUserGroup] = createSignal("");
-  const [userName, setUserName] = createSignal("");
+  const [userGroup, setUserGroup] = createSignal(identity.group);
+  const [userName, setUserName] = createSignal(identity.name);
 
   const valid = createMemo(() => userName() != "" && userGroup() != "");
 
@@ -23,9 +23,7 @@ export const Identify: Component = () => {
     setIdentity({
       group: userGroup(),
       name: userName(),
-      empty: false
     })
-
 
     navigate("/pick");
   }

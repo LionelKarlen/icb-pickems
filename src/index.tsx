@@ -11,6 +11,7 @@ import { createEffect, ParentComponent } from 'solid-js';
 import { center } from '@style/patterns';
 import { identity } from './lib/store/identity';
 import { Admin } from './pages/Admin';
+import { css } from '@style/css';
 
 const root = document.getElementById('root');
 
@@ -22,9 +23,12 @@ if (import.meta.env.DEV && !(root instanceof HTMLElement)) {
 
 const Root: ParentComponent = (props) => {
   return (
-    <div class={center({ padding: "5", width: "100%", height: "100vh" })}>
-      {props.children}
-    </div>
+    <>
+      <a href="/" class={css({ color: "fg.muted", position: "absolute", left: "1em", top: "1em" })}>Home</a>
+      <div class={center({ padding: "5", width: "100%", height: "100vh" })}>
+        {props.children}
+      </div>
+    </>
   );
 }
 
@@ -32,7 +36,7 @@ const GuardUnidentified: ParentComponent = (props) => {
   const navigate = useNavigate();
 
   createEffect(() => {
-    if (identity.empty) {
+    if (identity.group == "" && identity.name == "") {
       navigate("/");
     }
   });

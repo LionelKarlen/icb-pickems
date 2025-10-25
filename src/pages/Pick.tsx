@@ -4,7 +4,7 @@ import { blanked_groups, group_a, group_b } from "../lib/store/group";
 import { hstack, stack } from "@style/patterns";
 import { Btn } from "../lib/components/Btn";
 import { Pickem } from "../lib/types/pickem";
-import { Identity, identity } from "../lib/store/identity";
+import { identity } from "../lib/store/identity";
 import { useNavigate } from "@solidjs/router";
 import { pb } from "../lib/store/pocketbase";
 
@@ -29,8 +29,8 @@ export const Pick: Component = () => {
 
 
     const obj: Pickem = {
-      user_name: (identity as Identity).name,
-      user_group: (identity as Identity).group,
+      user_name: identity.name,
+      user_group: identity.group,
       a_winner: a_winner(),
       a_runner: a_runner(),
       a_finals: a_finals(),

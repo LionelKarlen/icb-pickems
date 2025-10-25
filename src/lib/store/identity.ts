@@ -5,4 +5,4 @@ export type Identity = {
   group: string
 }
 
-export const [identity, setIdentity] = createStore<Identity & { empty: false } | { empty: true }>({ empty: true });
+export const [identity, setIdentity] = createStore<Identity>({ name: "", group: "" });

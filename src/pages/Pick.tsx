@@ -6,6 +6,7 @@ import { Btn } from "../lib/components/Btn";
 import { Pickem } from "../lib/types/pickem";
 import { Identity, identity } from "../lib/store/identity";
 import { useNavigate } from "@solidjs/router";
+import { pb } from "../lib/store/pocketbase";
 
 export const Pick: Component = () => {
 
@@ -23,7 +24,7 @@ export const Pick: Component = () => {
 
   const navigate = useNavigate();
 
-  function handleSubmit() {
+  async function handleSubmit() {
     if (!valid()) return;
 
 
@@ -39,7 +40,7 @@ export const Pick: Component = () => {
       total_winner: total_winner()
     }
 
-    //TODO: Write to db
+    await pb.collection("pickems").create(obj)
 
 
     navigate("/thankyou");

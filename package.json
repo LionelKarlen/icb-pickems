@@ -23,6 +23,7 @@
   "dependencies": {
     "@ark-ui/solid": "^5.26.2",
     "@solidjs/router": "^0.15.3",
+    "pocketbase": "^0.26.2",
     "solid-icons": "^1.1.0",
     "solid-js": "^1.9.5"
   }

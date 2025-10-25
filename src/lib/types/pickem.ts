@@ -9,3 +9,5 @@ export type Pickem = {
   b_finals: string,
   total_winner: string
 }
+
+export type HasId<T> = T & { id: string };

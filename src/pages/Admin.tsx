@@ -1,21 +1,35 @@
-import { Component, createResource, Index, Match, Show, Suspense, Switch } from "solid-js";
+import { Component, createResource, createSignal, Index, Match, Show, Suspense, Switch } from "solid-js";
 import { authStore, logout, pb } from "../lib/store/pocketbase";
 import { Login } from "./Login";
-import { Pickem } from "../lib/types/pickem";
+import { HasId, Pickem } from "../lib/types/pickem";
 import { hstack, stack } from "@style/patterns";
 import "./admin.module.css"
 import { css } from "@style/css";
 import { CSVFile } from "../lib/types/csv";
-import { useNavigate } from "@solidjs/router";
+import { ConfirmDialog } from "../lib/components/Dialog";
 
 export const Admin: Component = () => {
 
-  const [data] = createResource(fetcher)
+  const [data, { mutate }] = createResource(fetcher)
 
   async function fetcher() {
     if ((authStore.auth ?? { id: null }).id == null) return;
 
     return await pb.collection("pickems").getFullList<Pickem>();
+  }
+
+  const [confirmOpen, setConfirmOpen] = createSignal(false);
+
+  async function deleteAll() {
+    // pocketbase has no way to delete an entire collection :/
+    let entries = await pb.collection("pickems").getFullList<HasId<Pickem>>();
+
+    // pocketbase has no way of batching requests :(
+    for (const e of entries) {
+      pb.collection("pickems").delete(e.id);
+    }
+    setConfirmOpen(false);
+    mutate([])
   }
 
   function getExportUrl() {
@@ -25,10 +39,9 @@ export const Admin: Component = () => {
     return URL.createObjectURL(blob);
   }
 
-  const navigate = useNavigate();
-
   return (
     <>
+      <ConfirmDialog onConfirm={deleteAll} open={confirmOpen()} updateOpen={setConfirmOpen} />
       <Show when={(authStore.auth ?? { id: null }).id != null} fallback={<Login />}>
         <Suspense fallback={<div>Loading...</div>}>
           <Switch>
@@ -36,15 +49,16 @@ export const Admin: Component = () => {
               <span>Error: {data.error.message}</span>
             </Match>
             <Match when={data()}>
-              <div class={hstack({ gap: 4, position: "absolute", top: "1em", right: "1em" })}>
+              <div class={hstack({ gap: 4, position: "absolute", top: "1em", right: "1em", direction: "rtl" })}>
                 <a href={getExportUrl()} download={`icb pickems ${new Date(Date.now()).toLocaleString("de-ch")}.csv`}
                   class={css({
-                    position: "absolute",
-                    right: "1em",
-                    top: "1em",
                     color: "fg.muted",
                     cursor: "pointer"
                   })}>Export</a>
+                <button class={css({
+                  color: "fg.muted",
+                  cursor: "pointer"
+                })} onclick={() => setConfirmOpen(true)}> Delete</button>
               </div>
               <div class={stack({})}>
                 <table>

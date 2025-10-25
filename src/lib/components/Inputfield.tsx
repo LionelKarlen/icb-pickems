@@ -9,6 +9,7 @@ type props = {
   onChange: (value: string) => void,
   value: string,
   invalid?: boolean
+  type?: "password" | "text"
 }
 
 export const Inputfield: Component<props> = (props) => {
@@ -18,7 +19,7 @@ export const Inputfield: Component<props> = (props) => {
     <>
       <Field.Root class={classes.root}>
         <Field.Label class={classes.label}>{props.label}</Field.Label>
-        <ark.input class={classes.input} value={props.value} oninput={(e) => props.onChange(e.target.value)} />
+        <ark.input class={classes.input} value={props.value} oninput={(e) => props.onChange(e.target.value)} type={props.type ?? "text"} />
         <Show when={props.helper}>
           <Field.HelperText class={classes.helperText}>{props.helper}</Field.HelperText>
         </Show>

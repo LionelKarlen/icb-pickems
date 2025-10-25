@@ -10,6 +10,7 @@ import { Pick } from './pages/Pick';
 import { createEffect, ParentComponent } from 'solid-js';
 import { center } from '@style/patterns';
 import { identity } from './lib/store/identity';
+import { Admin } from './pages/Admin';
 
 const root = document.getElementById('root');
 
@@ -49,4 +50,5 @@ render(() => <Router root={Root}>
     <Route path="/thankyou" component={Thankyou} />
     <Route path="/pick" component={Pick} />
   </Route>
+  <Route path="/admin" component={Admin} />
 </Router >, root!);

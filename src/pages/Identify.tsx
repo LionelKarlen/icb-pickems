@@ -5,7 +5,8 @@ import { stack } from "@style/patterns";
 import { Inputfield } from "../lib/components/Inputfield";
 import { Btn } from "../lib/components/Btn";
 import { setIdentity } from "../lib/store/identity";
-import { useNavigate } from "@solidjs/router";
+import { A, useNavigate } from "@solidjs/router";
+import { css } from "@style/css";
 
 export const Identify: Component = () => {
 
@@ -39,6 +40,13 @@ export const Identify: Component = () => {
         <Btn onClick={handleSubmit} disabled={!valid()}>Start Picking</Btn>
 
       </div>
+      <A href={"/admin"} class={css({
+        position: "absolute",
+        bottom: "1em",
+        right: "1em",
+        color: "fg.disabled",
+        cursor: "pointer"
+      })}>I'm an admin</A>
     </>
   );
 }

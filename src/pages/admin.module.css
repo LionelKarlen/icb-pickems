@@ -1,0 +1,17 @@
+thead td {
+  font-weight: bold;
+}
+
+td {
+  height: 50px;
+  padding: 1em;
+}
+
+tr {
+  border-bottom: 1px solid;
+}
+
+.divider {
+  background: red;
+  border-right: 1px solid;
+}

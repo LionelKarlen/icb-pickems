@@ -11,3 +11,10 @@ export type Pickem = {
 }
 
 export type WithID<T> = T & { id: string };
+
+export type WithCreated<T> = T & { created: string };
+
+export function formatDate(created: string): string {
+  const d = new Date(created);
+  return d.toLocaleString("de-ch").replaceAll(", ", " ");
+}

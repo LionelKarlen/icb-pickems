@@ -1,7 +1,7 @@
 import { Component, createResource, createSignal, Index, Match, Show, Suspense, Switch } from "solid-js";
 import { authStore, logout, pb } from "../lib/store/pocketbase";
 import { Login } from "./Login";
-import { WithID, Pickem } from "../lib/types/pickem";
+import { WithID, Pickem, WithCreated, formatDate } from "../lib/types/pickem";
 import { hstack, stack } from "@style/patterns";
 import "./admin.module.css"
 import { css } from "@style/css";
@@ -15,7 +15,7 @@ export const Admin: Component = () => {
   async function fetcher() {
     if ((authStore.auth ?? { id: null }).id == null) return;
 
-    return await pb.collection("pickems").getFullList<Pickem>();
+    return await pb.collection("pickems").getFullList<WithCreated<Pickem>>();
   }
 
   const [confirmOpen, setConfirmOpen] = createSignal(false);
@@ -64,7 +64,8 @@ export const Admin: Component = () => {
                   <thead>
                     <tr>
                       <td>Group</td>
-                      <td class={css({ borderRight: "1px solid" })}>Name</td>
+                      <td>Name</td>
+                      <td class={css({ borderRight: "1px solid" })}>Created</td>
                       <td>A Winner</td>
                       <td>A Runner-Up</td>
                       <td>A Finals</td>
@@ -78,7 +79,8 @@ export const Admin: Component = () => {
                     <Index each={data()}>
                       {(item) => <tr>
                         <td>{item().user_group}</td>
-                        <td class={css({ borderRight: "1px solid" })}>{item().user_name}</td>
+                        <td>{item().user_name}</td>
+                        <td class={css({ borderRight: "1px solid" })}>{formatDate(item().created)}</td>
                         <td>{item().a_winner}</td>
                         <td>{item().a_runner}</td>
                         <td>{item().a_finals}</td>

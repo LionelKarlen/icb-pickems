@@ -1,4 +1,4 @@
-import { Component, createMemo, createResource, createSignal } from "solid-js";
+import { Component, createMemo, createResource, createSignal, Setter } from "solid-js";
 import { Tablepicker } from "../lib/components/Tablepicker";
 import { blanked_groups, group_a, group_b } from "../lib/store/group";
 import { hstack, stack } from "@style/patterns";
@@ -52,7 +52,7 @@ export const Pick: Component = () => {
 
   const [total_winner, set_total_winner] = createSignal("");
 
-  const valid = createMemo(() => a_winner() != "" && a_runner() != "" && a_finals() != "" && b_winner() != "" && b_runner() != "" && b_finals() != "" && total_winner() != "");
+  const valid = createMemo(() => a_winner() != "" && a_runner() != "" && a_finals() != "" && b_winner() != "" && b_runner() != "" && b_finals() != "" && total_winner() != "" && a_winner() != a_runner() && b_winner() != b_runner());
 
   const navigate = useNavigate();
 
@@ -76,6 +76,12 @@ export const Pick: Component = () => {
     navigate("/thankyou");
   }
 
+  function enforceExclude(value: string, other: string, setter: Setter<string>) {
+    if (value != other) {
+      setter(value)
+    }
+  }
+
   return (
     <>
       <div class={stack({ gap: 5 })}>
@@ -83,14 +89,14 @@ export const Pick: Component = () => {
           <div class={stack({ gap: 0 })}>
             <div class={hstack({ gap: 0 })}>
               <Tablepicker options={group_a} labels={group_a} disabled value="" onChange={() => { }} />
-              <Tablepicker options={group_a} label="Group Winner" disabled={disabled()} value={a_winner()} onChange={set_a_winner} />
-              <Tablepicker options={group_a} label="Group Runner Up" disabled={disabled()} value={a_runner()} onChange={set_a_runner} />
+              <Tablepicker options={group_a} label="Group Winner" disabled={disabled()} value={a_winner()} onChange={(v) => enforceExclude(v, a_runner(), set_a_winner)} />
+              <Tablepicker options={group_a} label="Group Runner Up" disabled={disabled()} value={a_runner()} onChange={(v) => enforceExclude(v, a_winner(), set_a_runner)} />
               <Tablepicker options={group_a} label="Group Finals" disabled={disabled()} value={a_finals()} onChange={set_a_finals} />
             </div>
             <div class={hstack({ gap: 0 })}>
               <Tablepicker options={group_b} labels={group_b} disabled value="" onChange={() => { }} />
-              <Tablepicker options={group_b} label="Group Winner" disabled={disabled()} value={b_winner()} onChange={set_b_winner} />
-              <Tablepicker options={group_b} label="Group Runner Up" disabled={disabled()} value={b_runner()} onChange={set_b_runner} />
+              <Tablepicker options={group_b} label="Group Winner" disabled={disabled()} value={b_winner()} onChange={(v) => enforceExclude(v, b_runner(), set_b_winner)} />
+              <Tablepicker options={group_b} label="Group Runner Up" disabled={disabled()} value={b_runner()} onChange={(v) => enforceExclude(v, b_winner(), set_b_runner)} />
               <Tablepicker options={group_b} label="Group Finals" disabled={disabled()} value={b_finals()} onChange={set_b_finals} />
             </div>
           </div>

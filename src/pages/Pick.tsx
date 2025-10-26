@@ -91,13 +91,13 @@ export const Pick: Component = () => {
               <Tablepicker options={group_a} labels={group_a} disabled value="" onChange={() => { }} />
               <Tablepicker options={group_a} label="Group Winner" disabled={disabled()} value={a_winner()} onChange={(v) => enforceExclude(v, a_runner(), set_a_winner)} />
               <Tablepicker options={group_a} label="Group Runner Up" disabled={disabled()} value={a_runner()} onChange={(v) => enforceExclude(v, a_winner(), set_a_runner)} />
-              <Tablepicker options={group_a} label="Group Finals" disabled={disabled()} value={a_finals()} onChange={set_a_finals} />
+              <Tablepicker options={group_a} label="Finals" disabled={disabled()} value={a_finals()} onChange={set_a_finals} />
             </div>
             <div class={hstack({ gap: 0 })}>
               <Tablepicker options={group_b} labels={group_b} disabled value="" onChange={() => { }} />
               <Tablepicker options={group_b} label="Group Winner" disabled={disabled()} value={b_winner()} onChange={(v) => enforceExclude(v, b_runner(), set_b_winner)} />
               <Tablepicker options={group_b} label="Group Runner Up" disabled={disabled()} value={b_runner()} onChange={(v) => enforceExclude(v, b_winner(), set_b_runner)} />
-              <Tablepicker options={group_b} label="Group Finals" disabled={disabled()} value={b_finals()} onChange={set_b_finals} />
+              <Tablepicker options={group_b} label="Finals" disabled={disabled()} value={b_finals()} onChange={set_b_finals} />
             </div>
           </div>
 

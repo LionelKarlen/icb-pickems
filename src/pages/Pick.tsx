@@ -3,10 +3,11 @@ import { Tablepicker } from "../lib/components/Tablepicker";
 import { blanked_groups, group_a, group_b } from "../lib/store/group";
 import { hstack, stack } from "@style/patterns";
 import { Btn } from "../lib/components/Btn";
-import { HasId, Pickem } from "../lib/types/pickem";
+import { Pickem } from "../lib/types/pickem";
 import { identity } from "../lib/store/identity";
 import { useNavigate } from "@solidjs/router";
 import { pb } from "../lib/store/pocketbase";
+import { ClientResponseError } from "pocketbase";
 
 export const Pick: Component = () => {
 
@@ -27,12 +28,19 @@ export const Pick: Component = () => {
 
       setDisabled(true);
 
-    } catch (e) { }
+    } catch (_e) {
+      const e = _e as ClientResponseError
+      // the fetcher responds with 404 whenever the given item does not exist
+      // we can ignore this exception, since this will happen whenever someone enters a new pickem
+      if (e.status != 404) {
+        console.error(e);
+      }
+    }
 
     return null;
   }
 
-  const [prev] = createResource(fetcher);
+  createResource(fetcher);
 
   const [a_winner, set_a_winner] = createSignal("");
   const [a_runner, set_a_runner] = createSignal("");
@@ -74,13 +82,13 @@ export const Pick: Component = () => {
         <div class={hstack({ gap: 0 })}>
           <div class={stack({ gap: 0 })}>
             <div class={hstack({ gap: 0 })}>
-              <Tablepicker options={group_a} labels={group_a} disabled value={""} onChange={() => { }} />
+              <Tablepicker options={group_a} labels={group_a} disabled value="" onChange={() => { }} />
               <Tablepicker options={group_a} label="Group Winner" disabled={disabled()} value={a_winner()} onChange={set_a_winner} />
               <Tablepicker options={group_a} label="Group Runner Up" disabled={disabled()} value={a_runner()} onChange={set_a_runner} />
               <Tablepicker options={group_a} label="Group Finals" disabled={disabled()} value={a_finals()} onChange={set_a_finals} />
             </div>
             <div class={hstack({ gap: 0 })}>
-              <Tablepicker options={group_b} labels={group_b} disabled value={""} onChange={() => { }} />
+              <Tablepicker options={group_b} labels={group_b} disabled value="" onChange={() => { }} />
               <Tablepicker options={group_b} label="Group Winner" disabled={disabled()} value={b_winner()} onChange={set_b_winner} />
               <Tablepicker options={group_b} label="Group Runner Up" disabled={disabled()} value={b_runner()} onChange={set_b_runner} />
               <Tablepicker options={group_b} label="Group Finals" disabled={disabled()} value={b_finals()} onChange={set_b_finals} />

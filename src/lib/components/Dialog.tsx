@@ -26,7 +26,7 @@ export const ConfirmDialog: Component<props> = (props) => {
               <Dialog.Title class={classes.title}>Confirm Reset</Dialog.Title>
               <Dialog.Description class={classes.description}>Are you sure you want to delete everything?</Dialog.Description>
               <div class={hstack({ gap: 4, marginTop: "2em", justifyContent: "end" })}>
-                <button onclick={() => props.updateOpen(false)} class={css({ color: "fg.muted", cursor: "pointer" })}>Cancel</button>
+                <button type="button" onclick={() => props.updateOpen(false)} class={css({ color: "fg.muted", cursor: "pointer" })}>Cancel</button>
                 <Btn onClick={props.onConfirm}>Confirm</Btn>
               </div>
             </Dialog.Content>

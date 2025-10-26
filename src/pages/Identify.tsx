@@ -31,14 +31,14 @@ export const Identify: Component = () => {
   return (
     <>
       <div class={stack({ gap: "4", width: "50%" })}>
-        <Selects label={"Group"} placeholder="Select your group" options={groups} onChange={(v) => setUserGroup(v)} value={userGroup()} />
+        <Selects label="Group" placeholder="Select your group" options={groups} onChange={(v) => setUserGroup(v)} value={userGroup()} />
 
         <Inputfield label="Name" value={userName()} onChange={(v) => setUserName(v)} />
 
         <Btn onClick={handleSubmit} disabled={!valid()}>Start Picking</Btn>
 
       </div>
-      <A href={"/admin"} class={css({
+      <A href="/admin" class={css({
         position: "absolute",
         bottom: "1em",
         right: "1em",

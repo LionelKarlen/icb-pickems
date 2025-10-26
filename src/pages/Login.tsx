@@ -16,10 +16,10 @@ export const Login: Component = () => {
 
   async function handleSubmit() {
     try {
-      let res = await pb.collection("users").authWithPassword(`${username()}@icb.susco.ch`, password())
+      const res = await pb.collection("users").authWithPassword(`${username()}@icb.susco.ch`, password())
       setAuthStore({ auth: res.record });
     } catch (_e) {
-      let e = _e as ClientResponseError
+      const e = _e as ClientResponseError
       setError(e.message);
     }
   }

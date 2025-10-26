@@ -1,7 +1,7 @@
 import { Component, createResource, createSignal, Index, Match, Show, Suspense, Switch } from "solid-js";
 import { authStore, logout, pb } from "../lib/store/pocketbase";
 import { Login } from "./Login";
-import { HasId, Pickem } from "../lib/types/pickem";
+import { WithID, Pickem } from "../lib/types/pickem";
 import { hstack, stack } from "@style/patterns";
 import "./admin.module.css"
 import { css } from "@style/css";
@@ -22,9 +22,8 @@ export const Admin: Component = () => {
 
   async function deleteAll() {
     // pocketbase has no way to delete an entire collection :/
-    let entries = await pb.collection("pickems").getFullList<HasId<Pickem>>();
+    const entries = await pb.collection("pickems").getFullList<WithID<Pickem>>();
 
-    // pocketbase has no way of batching requests :(
     for (const e of entries) {
       pb.collection("pickems").delete(e.id);
     }
@@ -35,7 +34,7 @@ export const Admin: Component = () => {
   function getExportUrl() {
     if (!data()) return;
 
-    let blob = CSVFile.fromPickems(data()!).toBlob()
+    const blob = CSVFile.fromPickems(data()!).toBlob()
     return URL.createObjectURL(blob);
   }
 
@@ -55,7 +54,7 @@ export const Admin: Component = () => {
                     color: "fg.muted",
                     cursor: "pointer"
                   })}>Export</a>
-                <button class={css({
+                <button type="button" class={css({
                   color: "fg.muted",
                   cursor: "pointer"
                 })} onclick={() => setConfirmOpen(true)}> Delete</button>
@@ -97,7 +96,7 @@ export const Admin: Component = () => {
         </Suspense>
       </Show >
 
-      <button onclick={logout} class={css({
+      <button type="button" onclick={logout} class={css({
         position: "absolute",
         bottom: "1em",
         right: "1em",

@@ -1,7 +1,7 @@
 import { ark } from "@ark-ui/solid";
 import { A } from "@solidjs/router";
 import { sva } from "@style/css";
-import { Match, ParentComponent, Show, Switch } from "solid-js"
+import { ParentComponent, Show } from "solid-js"
 
 type props = {
   onClick: (() => void) | string,
@@ -17,7 +17,7 @@ export const Btn: ParentComponent<props> = (props) => {
   return (
     <>
       <Show when={typeof props.onClick == "string"} fallback={
-        <ark.button disabled={props.disabled} class={classes.button} onclick={props.onClick as () => void}>
+        <ark.button type="button" disabled={props.disabled} class={classes.button} onclick={props.onClick as () => void}>
           {props.children}
         </ark.button>
       }>

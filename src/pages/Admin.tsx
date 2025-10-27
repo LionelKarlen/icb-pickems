@@ -3,7 +3,7 @@ import { authStore, logout, pb } from "../lib/store/pocketbase";
 import { Login } from "./Login";
 import { WithID, Pickem, WithCreated, formatDate } from "../lib/types/pickem";
 import { hstack, stack } from "@style/patterns";
-import "./admin.module.css"
+import "./admin.css"
 import { css } from "@style/css";
 import { CSVFile } from "../lib/types/csv";
 import { ConfirmDialog } from "../lib/components/Dialog";

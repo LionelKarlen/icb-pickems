@@ -18,6 +18,9 @@
         pkgs = import nixpkgs { inherit system; };
       in
       {
+        packages = {
+          default = pkgs.callPackage ./icb.nix { };
+        };
         devShells = {
           default =
             with pkgs;

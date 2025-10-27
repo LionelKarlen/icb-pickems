@@ -2,7 +2,7 @@
 import type { AnySelector, Selectors } from './selectors';
 
 export interface Conditions {
-	/** `&:is(:hover, [data-hover])` */
+	/** `@media (hover: hover) and (pointer: fine) &:is(:hover, [data-hover])` */
 	"_hover": string
 	/** `&:is(:focus, [data-focus])` */
 	"_focus": string
@@ -108,13 +108,13 @@ export interface Conditions {
 	"_groupExpanded": string
 	/** `.group:is(:invalid, [data-invalid], [aria-invalid=true]) &` */
 	"_groupInvalid": string
-	/** `&:is(:indeterminate, [data-indeterminate], [aria-checked=mixed], [data-state="indeterminate"])` */
+	/** `&:is(:indeterminate, [data-indeterminate], [aria-checked=mixed], [data-state=indeterminate])` */
 	"_indeterminate": string
 	/** `&:is(:required, [data-required], [aria-required=true])` */
 	"_required": string
 	/** `&:is(:valid, [data-valid])` */
 	"_valid": string
-	/** `&:is(:invalid, [data-invalid], [aria-invalid=true])` */
+	/** `&:is([aria-invalid])` */
 	"_invalid": string
 	/** `&:autofill` */
 	"_autofill": string
@@ -132,7 +132,7 @@ export interface Conditions {
 	"_selected": string
 	/** `&:is([aria-grabbed=true], [data-grabbed])` */
 	"_grabbed": string
-	/** `&[data-state=under-value]` */
+	/** `&:is([data-state="under-value"])` */
 	"_underValue": string
 	/** `&[data-state=over-value]` */
 	"_overValue": string
@@ -150,15 +150,15 @@ export interface Conditions {
 	"_fullscreen": string
 	/** `&:is([data-loading], [aria-busy=true])` */
 	"_loading": string
-	/** `&:is([hidden], [data-hidden])` */
+	/** `&:is([hidden])` */
 	"_hidden": string
-	/** `&:is([aria-current=true], [data-current])` */
+	/** `&:is([data-current])` */
 	"_current": string
 	/** `&[aria-current=page]` */
 	"_currentPage": string
 	/** `&[aria-current=step]` */
 	"_currentStep": string
-	/** `&[data-today]` */
+	/** `&:is([data-today])` */
 	"_today": string
 	/** `&[data-unavailable]` */
 	"_unavailable": string
@@ -182,7 +182,7 @@ export interface Conditions {
 	"_portrait": string
 	/** `.dark &` */
 	"_dark": string
-	/** `.light &` */
+	/** `:root &, .light &` */
 	"_light": string
 	/** `@media (prefers-color-scheme: dark)` */
 	"_osDark": string
@@ -216,6 +216,12 @@ export interface Conditions {
 	"_noscript": string
 	/** `@media (inverted-colors: inverted)` */
 	"_invertedColors": string
+	/** `&:is([aria-collapsed=true], [data-collapsed], [data-state="collapsed"])` */
+	"_collapsed": string
+	/** `&:is([data-state="off"])` */
+	"_off": string
+	/** `&:is([data-state="on"])` */
+	"_on": string
 	/** `@media screen and (min-width: 40rem)` */
 	"sm": string
 	/** `@media screen and (min-width: 40rem) and (max-width: 47.9975rem)` */
@@ -266,30 +272,6 @@ export interface Conditions {
 	"lgTo2xl": string
 	/** `@media screen and (min-width: 80rem) and (max-width: 95.9975rem)` */
 	"xlTo2xl": string
-	/** `@container  (min-width: 20rem)` */
-	"@/xs": string
-	/** `@container  (min-width: 24rem)` */
-	"@/sm": string
-	/** `@container  (min-width: 28rem)` */
-	"@/md": string
-	/** `@container  (min-width: 32rem)` */
-	"@/lg": string
-	/** `@container  (min-width: 36rem)` */
-	"@/xl": string
-	/** `@container  (min-width: 42rem)` */
-	"@/2xl": string
-	/** `@container  (min-width: 48rem)` */
-	"@/3xl": string
-	/** `@container  (min-width: 56rem)` */
-	"@/4xl": string
-	/** `@container  (min-width: 64rem)` */
-	"@/5xl": string
-	/** `@container  (min-width: 72rem)` */
-	"@/6xl": string
-	/** `@container  (min-width: 80rem)` */
-	"@/7xl": string
-	/** `@container  (min-width: 90rem)` */
-	"@/8xl": string
 	/** The base (=no conditions) styles to apply  */
 	"base": string
 }

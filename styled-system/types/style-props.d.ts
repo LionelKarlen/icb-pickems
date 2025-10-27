@@ -551,7 +551,7 @@ appearance?: ConditionalValue<CssVars | CssProperties["appearance"] | AnyString>
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/aspect-ratio
    */
-aspectRatio?: ConditionalValue<UtilityValues["aspectRatio"] | CssVars | CssProperties["aspectRatio"] | AnyString>
+aspectRatio?: ConditionalValue<CssProperties["aspectRatio"] | AnyString>
  /**
    * The **`backdrop-filter`** CSS property lets you apply graphical effects such as blurring or color shifting to the area behind an element. Because it applies to everything _behind_ the element, to see the effect you must make the element or its background at least partially transparent.
    *
@@ -6203,7 +6203,7 @@ writingMode?: ConditionalValue<CssVars | CssProperties["writingMode"] | AnyStrin
    *
    * @see https://developer.mozilla.org/docs/Web/CSS/z-index
    */
-zIndex?: ConditionalValue<CssProperties["zIndex"] | AnyString>
+zIndex?: ConditionalValue<UtilityValues["zIndex"] | CssVars | CssProperties["zIndex"] | AnyString>
  /**
    * The non-standard **`zoom`** CSS property can be used to control the magnification level of an element. `transform: scale()` should be used instead of this property, if possible. However, unlike CSS Transforms, `zoom` affects the layout size of the element.
    *

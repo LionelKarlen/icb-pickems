@@ -1,36 +1,26 @@
-## Usage
+# ICB Töggeli Pickems
+> A small pickems webapp for the töggeli tournament at ICB
 
-Those templates dependencies are maintained via [pnpm](https://pnpm.io) via `pnpm up -Lri`.
-
-This is the reason you see a `pnpm-lock.yaml`. That being said, any package manager will work. This file can be safely be removed once you clone a template.
+## Getting Started
+As a solidjs project, there are few dependencies needed to get started. The repository contains a flake with devShell definitions, that trivialise getting started.
+```bash
+$ nix develop
+```
+Will enter a shell with the lsp setup, ready to connect your editor. \
 
 ```bash
-$ npm install # or pnpm install or yarn install
+$ nix develop .#serve
+```
+Will enter a shell and execute the vite dev script, as well as a local pocketbase instance, both running in mprocs. This lets you easily control both processes at a glance. Vite supports HMR, so you'll most likely never even need to interact with these processes.
+
+## Building
+Install dependencies and run the build script. Static files are written to the `dist` folder, which can then be served by any webserver. The project relies on pocketbase for the backend, and as such it is intended to use `dist` as `pb_public`.
+```bash
+$ yarn
+$ yarn build
 ```
 
-### Learn more on the [Solid Website](https://solidjs.com) and come chat with us on our [Discord](https://discord.com/invite/solidjs)
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm run dev` or `npm start`
-
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br>
-
-### `npm run build`
-
-Builds the app for production to the `dist` folder.<br>
-It correctly bundles Solid in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-## Deployment
-
-You can deploy the `dist` folder to any static host provider (netlify, surge, now, etc.)
-
-## This project was created with the [Solid CLI](https://github.com/solidjs-community/solid-cli)
+Alternatively, the project can be built using the nix flake, which will handle the entire process and return a result folder with `pb_public` and `pb_migrations` subfolders.
+```bash
+$ nix build
+```

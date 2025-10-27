@@ -30,7 +30,7 @@ export const Identify: Component = () => {
 
   return (
     <>
-      <div class={stack({ gap: "4", width: "50%" })}>
+      <div class={stack({ gap: "4", lg: { width: "50%" }, md: { width: "75%" }, width: "100%" })}>
         <Selects label="Group" placeholder="Select your group" options={login_groups} onChange={(v) => setUserGroup(v)} value={userGroup()} />
 
         <Inputfield label="Name" value={userName()} onChange={(v) => setUserName(v)} />

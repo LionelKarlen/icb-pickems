@@ -25,7 +25,7 @@ export const Login: Component = () => {
   }
 
   return (
-    <div class={stack({ gap: "4", width: "50%" })}>
+    <div class={stack({ gap: "4", lg: { width: "50%" }, md: { width: "75%" }, width: "100%" })}>
 
       <Inputfield label="Username" value={username()} onChange={(v) => setUsername(v)} />
       <Inputfield label="Password" value={password()} onChange={(v) => setPassword(v)} type="password" />

@@ -59,7 +59,7 @@ export const Admin: Component = () => {
                   cursor: "pointer"
                 })} onclick={() => setConfirmOpen(true)}> Delete</button>
               </div>
-              <div class={stack({})}>
+              <div class={stack({ maxWidth: "100%", overflow: "scroll" })}>
                 <table>
                   <thead>
                     <tr>

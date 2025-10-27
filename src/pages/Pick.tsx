@@ -84,8 +84,8 @@ export const Pick: Component = () => {
 
   return (
     <>
-      <div class={stack({ gap: 5 })}>
-        <div class={hstack({ gap: 0 })}>
+      <div class={stack({ gap: 5, maxWidth: "100%" })}>
+        <div class={hstack({ gap: 0, overflow: "scroll" })}>
           <div class={stack({ gap: 0 })}>
             <div class={hstack({ gap: 0 })}>
               <Tablepicker options={group_a} labels={group_a} disabled value="" onChange={() => { }} />

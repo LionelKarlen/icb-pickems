@@ -25,7 +25,7 @@ const Root: ParentComponent = (props) => {
   return (
     <>
       <a href="/" class={css({ color: "fg.muted", position: "absolute", left: "1em", top: "1em" })}>Home</a>
-      <div class={center({ padding: "5", width: "100%", height: "100vh" })}>
+      <div class={center({ padding: "4", lg: { padding: "10" }, width: "100%", height: "100vh" })}>
         {props.children}
       </div>
     </>

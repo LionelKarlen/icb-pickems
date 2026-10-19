@@ -28,6 +28,7 @@
               buildInputs = [
                 typescript-language-server
                 pocketbase
+                yarn
               ];
             };
 
@@ -37,6 +38,7 @@
               buildInputs = [
                 pocketbase
                 mprocs
+                deno
               ];
               shellHook = ''mprocs "deno task dev" "pocketbase serve"'';
             };
